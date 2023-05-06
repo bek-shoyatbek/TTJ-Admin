@@ -66,19 +66,16 @@ async function sendData(ctx) {
 
             `  🏛TTJ : ${d.ttj} ` + "                                                                                  "
     });
+    await ctx.reply(`🏛TTJ ${ttjNumber} Talabalar soni : ${students.length}`);
     for (let i of data) {
         let dataString = JSON.stringify(i, null, 2);
-        ctx.reply(dataString, Markup.keyboard([["◀️ Asosiy Menu"]]).resize());
+        ctx.reply(dataString, Markup.keyboard([["👥 TTJ lar bo'yicha ma'lumot"], ["◀️ Asosiy Menu"]]).resize());
     }
 }
-
-async function printPDF(ctx) {
+async function writeDoc() {
     doc.pipe(fs.createWriteStream('../students.pdf'));
     let students = await db.User.find()
         .select("-__v -_id");
-    if (students.length == 0) {
-        return ctx.reply("Bu TTJ da Talabalar yo'q", Markup.keyboard([["◀️ Asosiy Menu"]]).resize())
-    }
     students = students.map(s => {
         return [s.fullName, s.fakultet, s.kurs, s.guruh, s.ttj];
     })
@@ -92,8 +89,26 @@ async function printPDF(ctx) {
     };
     await doc.table(table);
     doc.end();
-    ctx.replyWithDocument({ source: "students.pdf" })
 }
+
+async function printPDF(ctx) {
+    let students = await db.User.find()
+        .select("-__v -_id");
+    students = students.map(s => {
+        return [s.fullName, s.fakultet, s.kurs, s.guruh, s.ttj];
+    })
+    if (students.length == 0) {
+        return ctx.reply("Bu TTJ da Talabalar yo'q", Markup.keyboard([["🔙TTJ tanlash"], ["◀️ Asosiy Menu"]]).resize())
+    }
+    ctx.replyWithDocument({ source: "../students.pdf" });
+    // fs.unlink('', (err) => {
+    //     if (err) throw err;
+    //     console.log('path/file.txt was deleted');
+    // });
+
+
+}
+
 
 async function getUserInput(ctx) {
     const text = ctx.message.text.trim();
@@ -140,5 +155,5 @@ async function getUserInput(ctx) {
 module.exports = {
     restart, info, mainMenu, sendData,
     insertStudent, help, contactAdmin,
-    printPDF, getUserInput
+    printPDF, getUserInput, writeDoc
 };
