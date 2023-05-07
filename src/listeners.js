@@ -58,7 +58,7 @@ async function sendData(ctx) {
         return d =
             `🧑‍🎓Familiya Ism: ${d.fullName}` + "                                                                         " +
 
-            ` 🗄Fukultet: ${d.fakultet}` + "                                                                                  " +
+            ` 🗄Fakultet: ${d.fakultet}` + "                                                                                  " +
 
             ` 📚Kurs: ${d.kurs}` + "                                                                                                " +
 
