@@ -1,4 +1,4 @@
-# TTJ-Admin
+# TTJ-Admin 🏛️
 
 ## Install npm packages 
 ```
@@ -18,3 +18,6 @@ npm run dev
 ```
 npm run start
 ```
+
+## Now you can check your bot🙂
+
