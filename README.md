@@ -11,4 +11,10 @@ nano .env
 ```
 ## Run commands
 ### run in development
-``` npm run dev ```
+``` 
+npm run dev
+```
+### run in production
+```
+npm run start
+```
