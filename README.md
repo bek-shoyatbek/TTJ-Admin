@@ -9,3 +9,6 @@ npm install
 mv .env.example .env
 nano .env
 ```
+## Run commands
+* run in development
+* ``` npm run dev ```
